@@ -10,7 +10,7 @@
 
 ### 🛠️ Tecnologías & Stack Principal (Haz clic para ver la carpeta)
 
-[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/PHP)
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/form)
 [![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/C%23)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/tango3000/Proyectos/tree/main/JAVASCRIPT)
 [![Odoo](https://img.shields.io/badge/Odoo_18-714B67?style=for-the-badge&logo=odoo&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/Odoo%2018)
