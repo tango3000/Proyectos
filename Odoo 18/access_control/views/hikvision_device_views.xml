@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hikvision_device_tree" model="ir.ui.view">
+        <field name="name">hikvision.device.list</field>
+        <field name="model">hikvision.device</field>
+        <field name="arch" type="xml">
+            <list string="Dispositivos Hikvision">
+                <field name="ip"/>
+                <field name="name"/>
+                <field name="model"/>
+                <field name="other_info"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hikvision_device_form" model="ir.ui.view">
+        <field name="name">hikvision.device.form</field>
+        <field name="model">hikvision.device</field>
+        <field name="arch" type="xml">
+            <form string="Dispositivo Hikvision">
+                <sheet>
+                    <group>
+                        <field name="ip"/>
+                        <field name="name"/>
+                        <field name="model"/>
+                        <field name="other_info" widget="text"/>
+                    </group>
+                    <footer>
+                        <button string="Buscar Dispositivos" type="object" name="search_and_update_devices" class="btn-primary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hikvision_device" model="ir.actions.act_window">
+        <field name="name">Dispositivos Hikvision</field>
+        <field name="res_model">hikvision.device</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Haz clic en "Buscar Dispositivos" para encontrar dispositivos Hikvision en la red.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_access_control_root" name="Control de Acceso"/>
+
+    <menuitem id="menu_hikvision_device" name="Dispositivos Hikvision" parent="menu_access_control_root" action="action_hikvision_device"/>
+</odoo>

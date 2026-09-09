@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menú principal para el módulo Access Control -->
+    <menuitem id="menu_access_control_root" name="Control de Acceso" sequence="10"/>
+
+    <!-- Submenú para dispositivos Hikvision -->
+    <menuitem id="menu_hikvision_device" name="Dispositivos Hikvision" parent="menu_access_control_root" action="action_hikvision_device" sequence="1"/>
+</odoo>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider video</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+    <section>
+        <div class="bannerVideo" id="sliderShow">
+            <video src="./IMG/video1.mp4" autoplay muted loop class="active"></video>
+            <video src="./IMG/video2.mp4" autoplay muted loop></video>
+            <video src="./IMG/video3.mp4" autoplay muted loop></video>
+            <video src="./IMG/video4.mp4" autoplay muted loop></video>
+
+        </div>
+        <div class="container">
+            <header id="navbar">
+                <a href="#" class="logo">World</a>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Destination</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <span class="menuIcon" onclick="toggleMenu()"></span>
+            </header>
+            <div class="content">
+                <div class="bannerText" id="sliderShowText">
+                    <div class="active">
+                        <H2>Tokyo</H2>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum reiciendis deserunt, labore mollitia optio accusamus consequuntur quam! Veritatis, tempora fuga quae minus accusantium corrupti nihil, quibusdam aperiam nisi, quod quos!</p>
+                    </div>
+                    <div>
+                        <h2>Paris</h2>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum reiciendis deserunt, labore mollitia optio accusamus consequuntur quam! Veritatis, tempora fuga quae minus accusantium corrupti nihil, quibusdam aperiam nisi, quod quos!</p>
+                    </div>
+                    <div>
+                        <h2>Egipto</h2>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum reiciendis deserunt, labore mollitia optio accusamus consequuntur quam! Veritatis, tempora fuga quae minus accusantium corrupti nihil, quibusdam aperiam nisi, quod quos!</p>
+                </div>
+                <div>
+                    <h2>Malvinas</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum reiciendis deserunt, labore mollitia optio accusamus consequuntur quam! Veritatis, tempora fuga quae minus accusantium corrupti nihil, quibusdam aperiam nisi, quod quos!</p>
+                </div>
+            </div>
+            <ul class="controls">
+                <li onclick="prevSlide(); prevSlideText();"><img src="./IMG/left.png" alt=""></li>
+                <li onclick="nextSlide(); nextSlideText();"><img src="./IMG/right.png" alt=""></li>
+            </ul>
+        </div>
+    </section>
+    <script src="./script.js"></script>
+</body>
+</html>

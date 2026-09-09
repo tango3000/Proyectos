@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>HIKVISION - ARES ULTIMATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Outfit', sans-serif; color: #fff; }
+        #canvas { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 10; }
+        
+        .scene {
+            position: absolute; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; z-index: 20;
+            pointer-events: none;
+        }
+        .active { opacity: 1; visibility: visible; }
+
+        .hud-node {
+            position: absolute; width: 160px; height: 160px;
+            border: 2px solid #00d2ff; background: rgba(0, 210, 255, 0.05);
+            border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 25;
+            box-shadow: inset 0 0 30px rgba(0, 210, 255, 0.4);
+            transform: scale(0) rotate(-45deg);
+        }
+        .hud-node.visible { opacity: 1; transform: scale(1) rotate(0deg); box-shadow: 0 0 60px #00d2ff; }
+        .hud-node svg { width: 70px; height: 70px; fill: #00d2ff; filter: drop-shadow(0 0 15px #00d2ff); }
+        .hud-label { font-family: 'Bebas Neue'; font-size: 1.5rem; color: #00d2ff; margin-top: 15px; letter-spacing: 3px; text-shadow: 0 0 10px #00d2ff; }
+
+        .demo-container {
+            width: 75%; transform: perspective(1500px) rotateX(15deg);
+            box-shadow: 0 0 150px rgba(0, 210, 255, 0.8); border: 5px solid #00d2ff;
+            border-radius: 15px; overflow: hidden; opacity: 0;
+            animation: ares-reveal 2s forwards;
+        }
+        @keyframes ares-reveal { 
+            0% { opacity: 0; transform: perspective(1500px) rotateX(45deg) translateZ(-500px); }
+            100% { opacity: 1; transform: perspective(1500px) rotateX(15deg) translateZ(0); }
+        }
+        
+        .logo-final { width: 750px; filter: drop-shadow(0 0 100px #ff0000); opacity: 0; animation: fade-in 2s forwards; }
+        @keyframes fade-in { to { opacity: 1; } }
+
+        #startOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .btn-start {
+            padding: 40px 140px; border: 5px solid #ff0000;
+            font-size: 6rem; font-family: 'Bebas Neue'; color: #ff0000;
+            letter-spacing: 25px; transition: 0.5s; box-shadow: 0 0 50px rgba(255,0,0,0.4);
+        }
+        .btn-start:hover { background: #ff0000; color: #000; box-shadow: 0 0 200px #ff0000; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <div id="startOverlay">
+        <h1 style="font-family: 'Bebas Neue'; font-size: 10rem; letter-spacing: 30px; margin-bottom: 30px; text-shadow: 0 0 50px #ff0000;">THE ULTIMATE SYNC</h1>
+        <div class="btn-start">ACTIVATE</div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div id="s1" class="scene active"></div>
+    <div id="s2" class="scene"></div>
+    <div id="s3" class="scene">
+        <div id="hud-container" style="position: absolute; width: 100%; height: 100%;"></div>
+    </div>
+    <div id="s4" class="scene">
+        <div class="demo-container">
+            <img src="hikvision_demo.gif" style="width: 100%; display: block;" alt="Demo">
+        </div>
+    </div>
+    <div id="s5" class="scene">
+        <div style="text-align: center;">
+            <div style="font-family: 'Bebas Neue'; font-size: 5rem; letter-spacing: 15px; margin-bottom: 50px; color: #ff0000; text-shadow: 0 0 30px #ff0000;">DESARROLLADO POR</div>
+            <img src="Logo_empresa_trasp.png" class="logo-final" alt="Softwar">
+        </div>
+    </div>
+
+    <svg style="display: none;">
+        <symbol id="icon-face" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-2.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5zM9 11.75c-.41 0-.75.34-.75.75s.34.75.75.75 0.75-.34 0.75-.75-.34-.75-.75-.75zm6 0c-.41 0-.75.34-.75.75s.34.75.75.75 0.75-.34 0.75-.75-.34-.75-.75-.75z"/></symbol>
+        <symbol id="icon-finger" viewBox="0 0 24 24"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.67-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.15-.3-.47-.15-.7.91-1.4 2.1-2.48 3.53-3.21.24-.13.54-.04.67.2.13.24.04.55-.2.68-1.25.64-2.29 1.59-3.09 2.81-.11.19-.32.31-.47.31zm17.5 0c-.15 0-.36-.12-.47-.31-.8-1.22-1.84-2.17-3.09-2.81-.24-.13-.33-.44-.2-.68.13-.24.44-.32.67-.2 1.43.73 2.62 1.81 3.53 3.21.15.23.08.55-.15.7-.09.06-.19.09-.29.09zM12 22c-4.96 0-9-4.04-9-9 0-.28.22-.5.5-.5s.5.22.5.5c0 4.41 3.59 8 8 8s8-3.59 8-8c0-.28.22-.5.5-.5s.5.22.5.5c0 4.96-4.04 9-9 9z"/></symbol>
+        <symbol id="icon-odoo" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></symbol>
+    </svg>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a7345b.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let state = 'IDLE'; 
+        let sceneIndex = 0;
+        let lineOffset = 0;
+
+        const nodes = [
+            { id: 'face', icon: '#icon-face', x: 0.2, y: 0.3, label: 'ROSTRO' },
+            { id: 'finger', icon: '#icon-finger', x: 0.2, y: 0.7, label: 'HUELLA' },
+            { id: 'odoo', icon: '#icon-odoo', x: 0.5, y: 0.5, label: 'ODOO CORE' },
+            { id: 'hr', icon: '#icon-face', x: 0.8, y: 0.3, label: 'RECURSOS HUMANOS' },
+            { id: 'att', icon: '#icon-odoo', x: 0.8, y: 0.7, label: 'ASISTENCIAS' }
+        ];
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.targetX = x; this.targetY = y; this.color = color;
+                this.vx = (Math.random() - 0.5) * 12; this.vy = (Math.random() - 0.5) * 12;
+                this.acc = 0.08 + Math.random() * 0.05; this.size = 2; this.alpha = 0;
+            }
+            update(mode) {
+                if (mode === 'FORMING') {
+                    this.x += (this.targetX - this.x) * this.acc;
+                    this.y += (this.targetY - this.y) * this.acc;
+                    this.alpha = Math.min(this.alpha + 0.1, 1);
+                } else if (mode === 'DISINTEGRATING') {
+                    this.x += this.vx; this.y += this.vy;
+                    this.alpha = Math.max(this.alpha - 0.05, 0);
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color; ctx.globalAlpha = this.alpha;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        function initParticles(text, color) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            ctx.font = "900 220px 'Bebas Neue'";
+            ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+            const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            particles = [];
+            for (let y = 0; y < canvas.height; y += 7) {
+                for (let x = 0; x < canvas.width; x += 7) {
+                    if (data[(y * canvas.width + x) * 4 + 3] > 128) {
+                        particles.push(new Particle(x, y, color));
+                    }
+                }
+            }
+            state = 'FORMING';
+        }
+
+        function drawCircuit() {
+            if (sceneIndex !== 2) return;
+            lineOffset -= 2;
+            ctx.strokeStyle = "#00d2ff";
+            ctx.lineWidth = 3;
+            ctx.setLineDash([20, 10]);
+            ctx.lineDashOffset = lineOffset;
+            ctx.shadowBlur = 15; ctx.shadowColor = "#00d2ff";
+            
+            const center = nodes.find(n => n.id === 'odoo');
+            const cx = center.x * canvas.width;
+            const cy = center.y * canvas.height;
+
+            nodes.forEach(n => {
+                if (n.id === 'odoo') return;
+                const tx = n.x * canvas.width;
+                const ty = n.y * canvas.height;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                const mx = cx + (tx - cx) * 0.5;
+                ctx.lineTo(mx, cy);
+                ctx.lineTo(mx, ty);
+                ctx.lineTo(tx, ty);
+                ctx.stroke();
+            });
+            ctx.setLineDash([]);
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.update(state); p.draw();
+                if (state === 'FORMING' && i % 15 === 0) {
+                    for (let j = i + 1; j < Math.min(i + 40, particles.length); j++) {
+                        const dist = Math.sqrt((p.x - particles[j].x)**2 + (p.y - particles[j].y)**2);
+                        if (dist < 45) {
+                            ctx.beginPath(); ctx.strokeStyle = p.color; ctx.globalAlpha = 0.15;
+                            ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                        }
+                    }
+                }
+            });
+            drawCircuit();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- AUDIO (No tocar según petición) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playBraam() {
+            const now = audioCtx.currentTime;
+            const sub = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            sub.type = 'sawtooth'; sub.frequency.setValueAtTime(60, now);
+            sub.frequency.exponentialRampToValueAtTime(30, now + 4);
+            gain.gain.setValueAtTime(0.8, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 4);
+            sub.connect(gain); gain.connect(audioCtx.destination);
+            sub.start(); sub.stop(now + 4);
+        }
+        function playWhoosh() {
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine'; osc.frequency.setValueAtTime(100, now);
+            osc.frequency.exponentialRampToValueAtTime(2000, now + 0.5);
+            gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(0.3, now + 0.2);
+            gain.gain.linearRampToValueAtTime(0, now + 0.5);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(now + 0.5);
+        }
+
+        const narration = [
+            "HIKVISION. LA FUERZA DE LA SEGURIDAD.",
+            "ODOO. EL CEREBRO DE TU NEGOCIO.",
+            "UNA INTEGRACIÓN SIN PRECEDENTES. INTELIGENCIA PURA.",
+            "EL CONTROL TOTAL... EN TUS MANOS.",
+            "DESARROLLADO POR SOFTWAR. TU MEJOR OPCIÓN."
+        ];
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-MX'; utterance.pitch = 0.3; utterance.rate = 0.75;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function nextScene() {
+            state = 'DISINTEGRATING';
+            playWhoosh();
+            setTimeout(() => {
+                sceneIndex++;
+                if (sceneIndex < 5) {
+                    document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+                    document.getElementById('s' + (sceneIndex + 1)).classList.add('active');
+                    
+                    if (sceneIndex === 1) initParticles('ODOO', '#875A7B');
+                    else if (sceneIndex === 2) { particles = []; showHudNodes(); }
+                    else if (sceneIndex === 3) { document.getElementById('hud-container').innerHTML = ''; }
+                    else if (sceneIndex === 4) { playBraam(); }
+                    
+                    speak(narration[sceneIndex]);
+                    setTimeout(nextScene, 7000);
+                }
+            }, 1000);
+        }
+
+        function showHudNodes() {
+            const container = document.getElementById('hud-container');
+            container.innerHTML = '';
+            nodes.forEach((n, i) => {
+                const div = document.createElement('div');
+                div.className = 'hud-node';
+                div.style.left = (n.x * 100) + '%'; div.style.top = (n.y * 100) + '%';
+                div.style.transform = 'translate(-50%, -50%)';
+                div.innerHTML = `<svg><use href="${n.icon}"></use></svg><div class="hud-label">${n.label}</div>`;
+                container.appendChild(div);
+                setTimeout(() => { div.classList.add('visible'); }, i * 350);
+            });
+        }
+
+        document.getElementById('startOverlay').addEventListener('click', () => {
+            document.getElementById('startOverlay').style.display = 'none';
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            document.getElementById('bgMusic').play();
+            initParticles('HIKVISION', '#ff0000');
+            speak(narration[0]);
+            playBraam();
+            setTimeout(nextScene, 7000);
+        });
+    </script>
+</body>
+</html>

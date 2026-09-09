@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hikvision_device,hikvision.device access,model_hikvision_device,,1,1,1,1
