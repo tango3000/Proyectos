@@ -8,12 +8,14 @@
 
 ### 🛠️ Tecnologías & Stack Principal
 
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Odoo](https://img.shields.io/badge/Odoo_18-714B67?style=for-the-badge&logo=odoo&logoColor=white)
-![Yii2](https://img.shields.io/badge/Yii2-D80027?style=for-the-badge&logo=yii&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+### 🛠️ Tecnologías & Stack Principal (Haz clic para ver la carpeta)
+
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/PHP)
+[![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/C%23)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/tango3000/Proyectos/tree/main/JAVASCRIPT)
+[![Odoo](https://img.shields.io/badge/Odoo_18-714B67?style=for-the-badge&logo=odoo&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/Odoo%2018)
+[![Yii2](https://img.shields.io/badge/Yii2-D80027?style=for-the-badge&logo=yii&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/yii2)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://github.com/tango3000/Proyectos/tree/main/odoo-18-docker)
 
 </div>
 
