@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+    <form method="POST">
+        <h2>Resgistrate aqui</h2>
+        
+        <div class="input-wrapper">
+            <input type="text" name="name" placeholder='Nombre'>
+            <img class='input-icon' src="./images/name.svg" alt="">
+        </div>
+
+        <div class="input-wrapper">
+            <input type="number" name="apples" placeholder='Cantidad'>
+            <img class='input-icon' src="./images/Cant2.svg" alt="">
+        </div>
+
+        <div class="input-wrapper">
+            <input type="tel" name="telefono" placeholder='(Código de área) Número'>
+            <img class='input-icon' src="./images/phone.svg" alt="">
+        </div>
+        <input class="btn" type="submit" name="register" value="Registrar">
+    </form>
+
+    <?php
+        include(registro.php)
+    ?>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+form {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 50px 35px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 380px;
+}
+form h2 {
+  font-size: 22px;
+  color: #000;
+  margin: 0;
+  margin-bottom: 25px;
+  margin-right: 15px;
+}
+form .input-wrapper {
+  position: relative;
+  width: 400px;
+  margin-bottom: 15px;
+  margin-left: 50px;
+}
+form .input-wrapper input {
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 15px 20px 60px;
+  width: 100%;
+  border-radius: 25px;
+  border: 0;
+  box-shadow: 0 0 20px rgba(192, 203, 251, 0.8);
+  outline: none;
+  font-size: 18px;
+}
+form .input-wrapper .input-icon {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-55%);
+  color: #190af1;
+}
+form .btn {
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(177, 188, 238, 0.9);
+  font-size: 18px;
+  color: #FFF;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, rgba(0, 32, 175, 0.9) 25%, rgba(0, 7, 36, 0.9) 100%);
+  border-radius: 25px;
+  cursor: pointer;
+}
+form .btn:hover {
+  background-color: rgba(3, 13, 59, 0.9);
+}
+
+input::-moz-placeholder {
+  color: rgba(54, 72, 236, 0.6666666667);
+  font-size: 20px;
+}
+
+input::placeholder {
+  color: rgba(54, 72, 236, 0.6666666667);
+  font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+  form {
+    padding: 30px;
+    width: 100%;
+  }
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  input {
+    padding: 30px 0 30px 50px;
+  }
+  .input-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+.success {
+  position: absolute;
+  color: green;
+  font-size: 18px;
+  top: 60px;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  font-size: 18px;
+  top: 60px;
+}/*# sourceMappingURL=style.css.map */
