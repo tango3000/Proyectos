@@ -57,6 +57,6 @@
 ---
 
 📩 **¿Interesado en trabajar juntos?**  
-[Contáctame por LinkedIn](https://linkedin.com) | [Envíame un Correo](mailto:tu-correo@email.com)
+[Contáctame por LinkedIn](https://www.linkedin.com/in/richard-granado-a64772123) | [Envíame un Correo](mailto:richard.granado95@gmail.com)
 
 </div>
